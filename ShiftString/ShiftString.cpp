@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Windows.h>
+//#include <Windows.h>
 using namespace std;
 //Left shift the given string,the limited cost of time is O(n),the limited cost of space is O(1)
 
@@ -156,12 +156,34 @@ void ShiftStringByTurningOverWithCurision(char *str ,int n,int m,int begin,int e
 	}
 	
 }
+//method 3:Shift string by inverting
+void InvertString(char * str,int begin,int end)
+{
+	while(str[begin]!=NULL && str[end]!=NULL && begin<end)
+	{
+		char temp = str[begin];
+		str[begin] = str[end];
+		str[end] = temp;
+		begin++;
+		end--;
+	}	
+}
+void ShiftStringByInverting(char * str,int m)
+{
+	int length=0;
+	while(str[length++]!=0);
+	length--;
+	InvertString(str,0,m-1);
+	InvertString(str,m,length-1);
+	InvertString(str,0,length-1);
+}
 int main(int argc,char * argv[])
 {
 	char test[11]="abcdefghij";
 	//LeftShiftOneByOne(test,2);
 	//ShiftByTurningOver2(test,2);
 	//ShiftStringByTurningOverWithCurision(test,10,8,0,10,true);
+	ShiftStringByInverting(test,2);
 	cout<<test<<endl;
-	system("pause");
+	//system("pause");
 }
